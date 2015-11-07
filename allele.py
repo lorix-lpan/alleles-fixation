@@ -35,9 +35,10 @@ class Allele:
             lst.append(random.randrange(0,10))
         return lst
 
-a1 = Allele()
-while not a1._isFixated:
-    print(a1._lst, "  ", a1._freq)
-    a1.cross()
-print(a1._freq)
-print(a1._rounds)
+if __name__ == '__main__':
+    a1 = Allele()
+    while not a1._isFixated:
+        print(a1._lst, "  ", a1._freq)
+        a1.cross()
+    print("Result: ", a1._freq)
+    print("Rounds: ", a1._rounds)
