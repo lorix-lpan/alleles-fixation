@@ -1,7 +1,7 @@
 from allele import Allele
 import sys
 from PyQt5.QtWidgets import (QWidget, QPushButton, QLineEdit, QApplication,
-        QLabel, QGridLayout, QLineEdit)
+        QLabel, QGridLayout, QTextEdit)
 
 class Window(QWidget):
 
@@ -12,19 +12,19 @@ class Window(QWidget):
     def initUI(self):
         # Create grid layout
         self.grid = QGridLayout()
-        self.le = QLineEdit(self)
-        self.le.setReadOnly(True)
-
-        # Create an intance of the Allele class
-        self.alle = Allele()
+        self.textField = QTextEdit(self)
+        self.textField.setReadOnly(True)
 
         btnCross = QPushButton('Cross', self)
+        btnStart = QPushButton('Start/Clear', self)
 
         # Emitted events
         btnCross.clicked.connect(self.startCrossing)
+        btnStart.clicked.connect(self.startUp)
 
-        self.grid.addWidget(btnCross)
-        self.grid.addWidget(self.le)
+        self.grid.addWidget(btnCross,0,0)
+        self.grid.addWidget(btnStart,0,1)
+        self.grid.addWidget(self.textField,1,0)
 
         # Initiation of the Window
         self.setLayout(self.grid)
@@ -34,12 +34,24 @@ class Window(QWidget):
 
     # Perform crossing on the allele instance and display the updated info
     def startCrossing(self):
+        # If self.alle does not exist, raise an exception
+        try:
+            self.alle
+        except:
+            self.textField.append("Please press start to initialize first!")
+            return
         if not self.alle._isFixated:
             self.alle.cross()
             # self.grid.addWidget(QLabel(str(self.text()),self))
-            self.le.setText(self.textList()+"   "+self.textFreq())
+            self.textField.append(self.textList()+"   "+self.textFreq())
         else:
-            self.le.setText("Finished! Rounds: "+str(self.alle._rounds)+" "+self.textFreq())
+            self.textField.append("Finished! Rounds: "+str(self.alle._rounds)+" "+self.textFreq())
+
+    def startUp(self):
+        # Create an intance of the Allele class
+        self.alle = Allele()
+        self.textField.clear()
+        self.textField.append(self.textList()+"   "+self.textFreq())
 
     def textList(self):
         return "List: "+" ".join(str(e) for e in self.alle._lst)
