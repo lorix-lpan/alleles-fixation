@@ -8,8 +8,8 @@ setup(name='alleles_fixation',
         author_email='lawrence_pan@hot-shot.com',
         license='GPLv3',
         packages=['alleles_fixation'],
-        install_requires=[
-            'random',
-            'PyQt5.QtWidgets'
+        scripts=['bin/alleles-fixation'],
+        dependency_links = [
+            'https://github.com/baoboa/pyqt5'
         ],
         zip_safe=False)

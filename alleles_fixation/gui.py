@@ -1,4 +1,4 @@
-from allele import Allele
+from alleles_fixation import allele
 import sys
 from PyQt5.QtWidgets import (QWidget, QPushButton, QApplication, QGridLayout, QTextEdit)
 
@@ -48,7 +48,7 @@ class Window(QWidget):
 
     def startUp(self):
         # Create an intance of the Allele class
-        self.alle = Allele()
+        self.alle = allele.Allele()
         self.textField.clear()
         self.textField.append(self.textList()+"   "+self.textFreq())
 
@@ -59,7 +59,8 @@ class Window(QWidget):
         return "Frequency: "+str(self.alle._freq)
 
 
-if __name__ == '__main__':
+# Run the program
+def run():
     app = QApplication(sys.argv)
     ex = Window()
     sys.exit(app.exec_())
