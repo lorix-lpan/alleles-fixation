@@ -1,7 +1,6 @@
 from allele import Allele
 import sys
-from PyQt5.QtWidgets import (QWidget, QPushButton, QLineEdit, QApplication,
-        QLabel, QGridLayout, QTextEdit)
+from PyQt5.QtWidgets import (QWidget, QPushButton, QApplication, QGridLayout, QTextEdit)
 
 class Window(QWidget):
 
