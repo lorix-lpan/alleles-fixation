@@ -1,4 +1,4 @@
-from alleles_fixation import allele
+from alleles_fixation.allele import Allele
 import sys
 from PyQt5.QtWidgets import (QWidget, QPushButton, QApplication, QGridLayout, QTextEdit)
 
@@ -48,7 +48,7 @@ class Window(QWidget):
 
     def startUp(self):
         # Create an intance of the Allele class
-        self.alle = allele.Allele()
+        self.alle = Allele()
         self.textField.clear()
         self.textField.append(self.textList()+"   "+self.textFreq())
 
