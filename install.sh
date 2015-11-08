@@ -22,6 +22,7 @@ have_installed() {
 }
 
 # Check what package manager is installed
+# Assign value to PACM if it contains a empty string
 check_package_manager(){
   if [[ "$PACM" == "" ]];then
     for i in ${SUPPORTED_PMS[@]};do
@@ -38,6 +39,7 @@ check_package_manager(){
 # $1 => list of packages
 determine_package(){
   local arr=("$@")
+  local backup="$INSTALL_COMMAND"
   for i in ${arr[@]};do
     if ! eval "$CHECK_COMMAND $i" > /dev/null 2>&1;then
       INSTALL_COMMAND+=" $i"
@@ -45,6 +47,10 @@ determine_package(){
       continue
     fi
   done
+  # If no missing packages, skip installation
+  if [[ "$backup" == "$INSTALL_COMMAND" ]];then
+    INSTALL_COMMAND=""
+  fi
 }
 
 # Determine the install&update&check command according to the pm
