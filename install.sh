@@ -1,11 +1,20 @@
 #!/bin/bash
 
 # Global variables
+# Your name
+AUTHOR_NAME="Lawrence"
+AUTHOR_EMAIL="lawrence_pan@hot-shot.com"
+# The name of your application
+APP_NAME="Alleles fixation simulation"
+# Command to launch the program
+LAUNCH_NAME="alleles-fixation"
 # The package managers supported by this script
 SUPPORTED_PMS=("apt-get", "pacman")
 # Lists of packages with different names for different distro
 PACKAGE_LIST_ARCH=("python-pyqt5" "cowsay")
 PACKAGE_LIST_DEB=("python3-pyqt5")
+# String contains a list of missing packages
+MISSING_LIST=""
 # Name of the package manager
 PACM=""
 # Update package list, ex. sudo apt-get update
@@ -39,18 +48,14 @@ check_package_manager(){
 # $1 => list of packages
 determine_package(){
   local arr=("$@")
-  local backup="$INSTALL_COMMAND"
   for i in ${arr[@]};do
     if ! eval "$CHECK_COMMAND $i" > /dev/null 2>&1;then
       INSTALL_COMMAND+=" $i"
+      MISSING_LIST+="$i "
     else
       continue
     fi
   done
-  # If no missing packages, skip installation
-  if [[ "$backup" == "$INSTALL_COMMAND" ]];then
-    INSTALL_COMMAND=""
-  fi
 }
 
 # Determine the install&update&check command according to the pm
@@ -71,6 +76,43 @@ determine_command(){
   fi
 }
 
+# Install the missing dependencies if there are any
+install_depend(){
+  if [[ "$MISSING_LIST" == "" ]];then
+    echo "Dependencies are already successfully installed"
+  else
+    echo "$MISSING_LIST will be installed"
+    eval "$INSTALL_COMMAND"
+    # Check if they are installed successfully
+    MISSING_LIST=""
+    determine_command
+    install_depend
+  fi
+}
+
+# If the input is not N or n, execute command
+# $1 => command
+# $2 => question
+confirm_input(){
+  echo -n "$2"
+  local input
+  read input
+  if [[ "$input" == "N" || "$input" == "n" ]];then
+    echo "Exiting"
+    exit
+  else
+    eval "$1" > /dev/null
+  fi
+}
+
+echo ":: Installing $APP_NAME"
 check_package_manager
+echo "$PACM found"
+echo "resolving dependencies..."
 determine_command
-eval "$INSTALL_COMMAND"
+install_depend
+confirm_input "sudo python setup.py install" ":: Install $APP_NAME globally? [Y/n] "
+echo "Installed"
+echo "Type $LAUNCH_NAME in your terminal to launch the program"
+echo "If there exists any problem, delete '> /dev/null' on line 104 of this file to see the error messages. 
+Else, please contact the author, $AUTHOR_EMAIL". 
