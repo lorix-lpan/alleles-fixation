@@ -82,6 +82,7 @@ install_depend(){
     echo "Dependencies are already successfully installed"
   else
     echo "$MISSING_LIST will be installed"
+    eval "$UPDATE_COMMAND"
     eval "$INSTALL_COMMAND"
     # Check if they are installed successfully
     MISSING_LIST=""
@@ -117,7 +118,10 @@ install_python(){
   confirm_input "sudo $com setup.py install" ":: Install $APP_NAME globally? [Y/n] "
   echo "Installed"
   echo "Type $LAUNCH_NAME in your terminal to launch the program"
-  echo "If there exists any problem, delete '> /dev/null' on line 104 of this file to see the error messages. Else, please contact the author, $AUTHOR_EMAIL". 
+  echo "If there exists any problem, 
+  delete '> /dev/null' on line 104 of this file 
+  to see the error messages. 
+  Else, please contact the author, $AUTHOR_EMAIL". 
 }
 echo ":: Installing $APP_NAME"
 check_package_manager
