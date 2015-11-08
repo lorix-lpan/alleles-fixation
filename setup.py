@@ -9,7 +9,4 @@ setup(name='alleles_fixation',
         license='GPLv3',
         packages=['alleles_fixation'],
         scripts=['bin/alleles-fixation'],
-        dependency_links = [
-            'https://github.com/baoboa/pyqt5'
-        ],
         zip_safe=False)
