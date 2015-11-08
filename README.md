@@ -19,4 +19,5 @@ GNU GENERAL PUBLIC LICENSE Version 3
 * python3
 * python3-setuptools
 * python3-pyqt5
+
 ##### Note: Name may vary from distribution to distribution
