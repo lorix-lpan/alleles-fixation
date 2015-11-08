@@ -11,8 +11,8 @@ LAUNCH_NAME="alleles-fixation"
 # The package managers supported by this script
 SUPPORTED_PMS=("apt-get", "pacman")
 # Lists of packages with different names for different distro
-PACKAGE_LIST_ARCH=("python-pyqt5" "cowsay")
-PACKAGE_LIST_DEB=("python3-pyqt5")
+PACKAGE_LIST_ARCH=("python-pyqt5" "python-setuptools")
+PACKAGE_LIST_DEB=("python3-pyqt5" "python3-setuptools")
 # String contains a list of missing packages
 MISSING_LIST=""
 # Name of the package manager
@@ -105,6 +105,20 @@ confirm_input(){
   fi
 }
 
+install_python(){
+  local com
+  if [[ "$PACM" == "apt-get" ]];then
+    com="python3"
+  elif [[ "$PACM" == "pacman" ]];then
+    com="python"
+  else
+    com="python"
+  fi
+  confirm_input "sudo $com setup.py install" ":: Install $APP_NAME globally? [Y/n] "
+  echo "Installed"
+  echo "Type $LAUNCH_NAME in your terminal to launch the program"
+  echo "If there exists any problem, delete '> /dev/null' on line 104 of this file to see the error messages. Else, please contact the author, $AUTHOR_EMAIL". 
+}
 echo ":: Installing $APP_NAME"
 check_package_manager
 echo "$PACM found"
@@ -113,8 +127,6 @@ echo "resolving dependencies..."
 determine_command
 # Install dependencies
 install_depend
-confirm_input "sudo python setup.py install" ":: Install $APP_NAME globally? [Y/n] "
-echo "Installed"
-echo "Type $LAUNCH_NAME in your terminal to launch the program"
-echo "If there exists any problem, delete '> /dev/null' on line 104 of this file to see the error messages. 
-Else, please contact the author, $AUTHOR_EMAIL". 
+###### custom ######
+# Install the python pacakge
+install_python
