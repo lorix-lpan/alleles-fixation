@@ -109,7 +109,9 @@ echo ":: Installing $APP_NAME"
 check_package_manager
 echo "$PACM found"
 echo "resolving dependencies..."
+# Find dependencies
 determine_command
+# Install dependencies
 install_depend
 confirm_input "sudo python setup.py install" ":: Install $APP_NAME globally? [Y/n] "
 echo "Installed"

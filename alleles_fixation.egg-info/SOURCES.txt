@@ -1,5 +1,6 @@
 MANIFEST.in
 README.md
+install.sh
 setup.py
 alleles_fixation/__init__.py
 alleles_fixation/allele.py
