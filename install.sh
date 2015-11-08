@@ -9,7 +9,7 @@ APP_NAME="Alleles fixation simulation"
 # Command to launch the program
 LAUNCH_NAME="alleles-fixation"
 # The package managers supported by this script
-SUPPORTED_PMS=("apt-get", "pacman")
+SUPPORTED_PMS=("apt-get" "pacman")
 # Lists of packages with different names for different distro
 PACKAGE_LIST_ARCH=("python-pyqt5" "python-setuptools")
 PACKAGE_LIST_DEB=("python3-pyqt5" "python3-setuptools")
