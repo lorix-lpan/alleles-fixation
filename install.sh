@@ -91,6 +91,8 @@ install_depend(){
   fi
 }
 
+## Custom functions
+
 # If the input is not N or n, execute command
 # $1 => command
 # $2 => question
@@ -123,6 +125,8 @@ install_python(){
   to see the error messages. 
   Else, please contact the author, $AUTHOR_EMAIL". 
 }
+
+# Script starts here
 echo ":: Installing $APP_NAME"
 check_package_manager
 echo "$PACM found"
@@ -132,5 +136,5 @@ determine_command
 # Install dependencies
 install_depend
 ###### custom ######
-# Install the python pacakge
+# Install the python package
 install_python
