@@ -44,7 +44,7 @@ class Window(QWidget):
             # self.grid.addWidget(QLabel(str(self.text()),self))
             self.textField.append(self.textList()+"   "+self.textFreq())
         else:
-            self.textField.append("Finished! Rounds: "+str(self.alle._rounds)+" "+self.textFreq())
+            self.textField.append("Finished! Generations: "+str(self.alle._generations)+" "+self.textFreq())
 
     def startUp(self):
         # Create an intance of the Allele class
