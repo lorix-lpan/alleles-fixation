@@ -4,12 +4,14 @@ class Allele:
     # Class of list of alleles
 
     def __init__(self):
-        # initiate the object with a random list
-        self._lst = Allele.randomList()
-        # A list consists of A and a
-        self._letters = ""
+        # Number of alleles, default = 10
+        self._numAlle = 10
         # frequency of A, default 50%
         self._freq = 5
+        # initiate the object with a random list
+        self._lst = self.randomList()
+        # A list consists of A and a
+        self._letters = self.initLetters()
         # If it is fixated
         self._isFixated = False
         # number of generations
@@ -29,17 +31,24 @@ class Allele:
         # Check if it is fixated
         if freq == 0 or freq == 10:
             self._isFixated = True
-        self._letters = " ".join(alleleLst)
+        self._letters = "".join(alleleLst)
         self._freq = freq
-        self._lst = Allele.randomList()
+        self._lst = self.randomList()
         self._generations += 1
 
-    # Static methods
+    # Helpers
+    # Return a string contains a list of alleles
+    def initLetters(self):
+        letters = ""
+        letters += "A" * self._freq
+        letters += "a" * (self._numAlle - self._freq)
+        return letters
+
     # Generate a random number from 0-9
-    def randomList():
+    def randomList(self):
         lst = []
-        for i in range(10):
-            lst.append(random.randrange(0,10))
+        for i in range(self._numAlle):
+            lst.append(random.randrange(0,self._numAlle))
         return lst
 
 if __name__ == '__main__':

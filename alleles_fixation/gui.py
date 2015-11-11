@@ -42,21 +42,23 @@ class Window(QWidget):
         if not self.alle._isFixated:
             self.alle.cross()
             # self.grid.addWidget(QLabel(str(self.text()),self))
-            self.textField.append(self.textList()+"   "+self.textFreq())
+            self.textField.append(self.textList()+"   "+self.textFreq()+" "+self.alle._letters)
         else:
-            self.textField.append("Finished! Generations: "+str(self.alle._generations)+" "+self.textFreq())
+            self.textField.append("Finished! Generations:"+str(self.alle._generations)+" "+self.textFreq())
 
     def startUp(self):
         # Create an intance of the Allele class
         self.alle = Allele()
         self.textField.clear()
-        self.textField.append(self.textList()+"   "+self.textFreq())
+        self.textField.append(self.textList()+"   "+self.textFreq()+" "+self.alle._letters)
+
+# Returned texts
 
     def textList(self):
         return "List: "+" ".join(str(e) for e in self.alle._lst)
 
     def textFreq(self):
-        return "Frequency: "+str(self.alle._freq)
+        return "% of A: "+str(self.alle._freq)
 
 
 # Run the program
