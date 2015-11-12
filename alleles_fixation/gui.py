@@ -1,6 +1,7 @@
 from alleles_fixation.allele import Allele
 import sys
-from PyQt5.QtWidgets import (QWidget, QPushButton, QApplication, QGridLayout, QTextEdit)
+from PyQt5.QtWidgets import (QWidget, QPushButton, QApplication, QGridLayout,
+        QTextEdit, QMessageBox)
 
 class Window(QWidget):
 
@@ -20,6 +21,9 @@ class Window(QWidget):
         # Emitted events
         btnCross.clicked.connect(self.startCrossing)
         btnStart.clicked.connect(self.startUp)
+
+        self.messageBox = QMessageBox()
+        self.messageBox.setGeometry(400,400,300,300)
 
         self.grid.addWidget(btnCross,0,0)
         self.grid.addWidget(btnStart,0,1)
@@ -44,7 +48,12 @@ class Window(QWidget):
             # self.grid.addWidget(QLabel(str(self.text()),self))
             self.textField.append(self.textList()+"   "+self.textFreq()+" "+self.alle._letters)
         else:
-            self.textField.append("Finished! Generations:"+str(self.alle._generations)+" "+self.textFreq())
+            self.showMessageWindow()
+
+    def showMessageWindow(self):
+        self.messageBox.setText("Limit reached!\n"+"Generations: "+str(self.alle._generations))
+        self.messageBox.show()
+
 
     def startUp(self):
         # Create an intance of the Allele class
