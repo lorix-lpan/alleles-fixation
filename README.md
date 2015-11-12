@@ -15,6 +15,13 @@ GNU GENERAL PUBLIC LICENSE Version 3
 * $ bash install.sh
 * $ alleles-fixation
 
+### Update
+##### Note: Just in case if you are new to git
+To update simply:
+* $ cd alleles-fixation
+* $ git pull
+* $ bash install.sh
+
 ## Dependencies
 * python3
 * python3-setuptools
